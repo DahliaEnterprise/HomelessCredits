@@ -103,6 +103,7 @@
           while(total_generated < string_length_to_generate)
           {
             output = alphabet_table[generate_random_index_amongst_alphabet_table()];
+            total_generated = total_generated + 1;
           }
           
           return output;
