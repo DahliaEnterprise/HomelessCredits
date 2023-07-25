@@ -24,12 +24,27 @@
                 index = index + 1;
               }
             }
+          
             //Fault occured(No allowed character found)?
             if(current_character_index > -1)
             {
               //No fault occured
-              
+              //Execute Rotate Character
+              let rotate_character_index = current_character_index;
+              let continue_rotating = 1;
+              while(continue_rotating == 1)
+              {
+                rotate_character_index = rotate_character_index + 1;
+                //Continue loop through alphabet table
+                if(rotate_character_index == alphabet_table.length)
+                {
+                  rotate_character_index = 0;
+                }
+              }
             }
+          
+          //Return
+          return output;
         }
       
         //Entry Point
