@@ -77,12 +77,18 @@
         {
           let keep_generating = 1;
           while(keep_generating == 1)
+          {
+            
+            const array_for_one_random_integer = new Uint8Array(1);
+            self.crypto.getRandomValues(array_for_one_random_integer);
+            if(array_for_one_random_integer > -1)
             {
-              
-              const array_for_one_random_integer = new Uint8Array(1);
-              self.crypto.getRandomValues(array_for_one_random_integer);
-              console.log(array_for_one_random_integer);
+              if(array_for_one_random_integer < alphabet_table.length)
+              {
+
+              }
             }
+          }
         }
       
         //Entry Point
