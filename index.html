@@ -58,16 +58,19 @@
 
         function rotate_string(string_to_rotate, iterations)
         {
+          let output = "";
+          
           //Execute rotate each character per character position
           let index = 0;
           while(index < string_to_rotate.length)
           {
             let exponential_rotation_strength = (index + 2) * iterations;
-            let new_character = rotate_character(string_to_rotate[index], exponential_rotation_strength);
-
-            console.log(new_character);
+            let new_character_index = rotate_character(string_to_rotate[index], exponential_rotation_strength);
+            output = output + "" + alphabet_table[new_character_index];
             index = index + 1;
           }
+
+          return output;
         }
       
         //Entry Point
