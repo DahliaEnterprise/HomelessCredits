@@ -103,6 +103,8 @@
           let create_string_to_rotate_index = 0;
           while(create_string_to_rotate_index < 10)
           {
+            let character_index_choosen_by_random = generate_random_index_amongst_alphabet_table();
+            console.log(character_index_choosen_by_random);
             string_to_rotate = string_to_rotate + "" + alphabet_table[generate_random_index_amongst_alphabet_table()];
             create_string_to_rotate_index = create_string_to_rotate_index + 1;
           }
