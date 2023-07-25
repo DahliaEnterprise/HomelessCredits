@@ -42,9 +42,12 @@
                   rotate_character_index = 0;
                 }
 
-                iterations_consumed
+                iterations_consumed = iterations_consumed + 1;
 
-                if(rotate_character_index 
+                if(iterations_consumed == iterations)
+                {
+                  continue_rotating = 0;
+                }
               }
             }
           
