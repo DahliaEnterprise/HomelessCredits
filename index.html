@@ -75,7 +75,7 @@
 
         function generate_random_index_amongst_alphabet_table()
         {
-          const array_for_one_random_integer = new Int8Array(1);
+          const array_for_one_random_integer = new Uint8Array(1);
           self.crypto.getRandomValues(array_for_one_random_integer);
           console.log(array_for_one_random_integer);
         }
