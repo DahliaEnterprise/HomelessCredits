@@ -2,7 +2,7 @@
   <head>
     <script>
       //Global
-      const var alphabet_table = "abcdedfghijklmnopqrstuvwxyz0123456789";
+      const var alphabet_table = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
       //Functions
         //Rotate character based on iterations amongst the alphabet table
         function rotate_character(character, iterations)
@@ -45,6 +45,19 @@
           
           //Return
           return output;
+        }
+
+        function rotate_string(string_to_rotate, iterations)
+        {
+          //Execute rotate each character per character position
+          let index = 0;
+          while(index < string_to_rotate.length)
+          {
+            let exponential_rotation_strength = (index + 2) * iterations;
+            let new_character = rotate_character(string_to_rotate[index], exponential_rotation_strength);
+
+            console.log(new_character);
+          }
         }
       
         //Entry Point
