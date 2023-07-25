@@ -73,6 +73,7 @@
           return output;
         }
 
+        //Random Assistive Functions
         function generate_random_index_amongst_alphabet_table()
         {
           let output = -1;
@@ -94,22 +95,35 @@
 
           return output;
         }
+
+        function generate_random_string(string_length_to_generate)
+        {
+          let output = "";
+          let total_generated = 0;
+          while(total_generated < string_length_to_generate)
+          {
+            output = alphabet_table[generate_random_index_amongst_alphabet_table()];
+          }
+          
+          return output;
+        }
       
         //Entry Point
         function entry_function()
         {
           //UNIT TESTING
+          /*
           string_to_rotate = "";
           let create_string_to_rotate_index = 0;
-          while(create_string_to_rotate_index < 10)
+          while(create_string_to_rotate_index < 32)
           {
             let character_index_choosen_by_random = generate_random_index_amongst_alphabet_table();
-            console.log(character_index_choosen_by_random);
             string_to_rotate = string_to_rotate + "" + alphabet_table[generate_random_index_amongst_alphabet_table()];
             create_string_to_rotate_index = create_string_to_rotate_index + 1;
           }
           console.log(string_to_rotate);
-          
+          */
+          console.log(generate_random_string(10));
           console.log(rotate_character(string_to_rotate[0], 100));
           console.log(rotate_string(string_to_rotate, 100));
           console.log(generate_random_index_amongst_alphabet_table());
