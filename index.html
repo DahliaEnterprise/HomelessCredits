@@ -113,8 +113,11 @@
         function entry_function()
         {
           //UNIT TESTING
-          let string_to_rotate = generate_random_string(10);
-          string_to_rotate = rotate_string(string_to_rotate, 1000);
+          let string_to_rotate = generate_random_string(32);
+          const array_for_one_random_integer = new Uint32Array(1);
+          self.crypto.getRandomValues(array_for_one_random_integer);
+
+          string_to_rotate = rotate_string(string_to_rotate, array_for_one_random_integer[0]);
           
           //PRODUCTION
           //const string_to_rotate = "TESTING";
