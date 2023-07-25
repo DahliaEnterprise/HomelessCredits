@@ -56,7 +56,7 @@
           return output;
         }
 
-        function rotate_string(string_to_rotate, iterations)
+        function rotate_string_swap_character_per_character_position(string_to_rotate, iterations)
         {
           let output = "";
           
@@ -117,7 +117,7 @@
           const array_for_one_random_integer = new Uint32Array(1);
           self.crypto.getRandomValues(array_for_one_random_integer);
 
-          string_to_rotate = rotate_string(string_to_rotate, 1000);
+          string_to_rotate = rotate_string_swap_character_per_character_position(string_to_rotate, 1000);
           console.log(string_to_rotate);
           
           //PRODUCTION
