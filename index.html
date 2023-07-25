@@ -82,9 +82,9 @@
           {
             const array_for_one_random_integer = new Uint8Array(1);
             self.crypto.getRandomValues(array_for_one_random_integer);
-            if(array_for_one_random_integer > -1)
+            if(array_for_one_random_integer[0] > -1)
             {
-              if(array_for_one_random_integer < alphabet_table.length)
+              if(array_for_one_random_integer[0] < alphabet_table.length)
               {
                 keep_generating = 0;
                 output = array_for_one_random_integer[0];
