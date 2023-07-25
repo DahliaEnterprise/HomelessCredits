@@ -64,7 +64,7 @@
           let index = 0;
           while(index < string_to_rotate.length)
           {
-            let exponential_rotation_strength = (index + 2) * iterations;
+            let exponential_rotation_strength = (index + 2) * iterations;//Ensure it is always above 1 to enable randomness
             let new_character_index = rotate_character(string_to_rotate[index], exponential_rotation_strength);
             output = output + "" + alphabet_table[new_character_index];
             index = index + 1;
