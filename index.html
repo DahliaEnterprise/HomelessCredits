@@ -75,6 +75,8 @@
 
         function generate_random_index_amongst_alphabet_table()
         {
+          let output = -1;
+          
           let keep_generating = 1;
           while(keep_generating == 1)
           {
@@ -85,7 +87,7 @@
             {
               if(array_for_one_random_integer < alphabet_table.length)
               {
-
+                keep_generating = 0;
               }
             }
           }
