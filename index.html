@@ -72,6 +72,13 @@
 
           return output;
         }
+
+        function generate_random_index_amongst_alphabet_table()
+        {
+          const array_for_one_random_integer = new Int8Array(1);
+          self.crypto.getRandomValues(array_for_one_random_integer);
+          
+        }
       
         //Entry Point
         function entry_function()
