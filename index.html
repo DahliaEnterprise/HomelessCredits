@@ -7,7 +7,18 @@
         //Rotate character based on iterations amongst the alphabet table.
         function rotate_character(character, iterations)
         {
-          
+          //Determine current index amongst the alphabet table.
+          let current_character_index = -1;
+            //Execute
+            let index = 0;
+            while(index < alphabet_table.length)
+            {
+              if(alphabet_table[index] === character)
+              {
+                current_character_index = index;
+                index = alphabet_table.length;
+              }
+            }
         }
       
         //Entry Point
