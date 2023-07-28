@@ -2,7 +2,13 @@
 <head>
     <script>
         //Global
-        const alphabet_table = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
+            //Constants
+            const alphabet_table = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
+
+            //Generate Credits States
+            var generate_credits_last_percela_informacion = [];
+
+
         //Functions
         //Rotate character based on iterations amongst the alphabet table
         function rotate_character(character, iterations)
@@ -111,33 +117,45 @@
 
         function get_balance_from_server()
         {
-            var xhttp = new XMLHttpRequest();
-            xhttp.onreadystatechange = function()
-            {
-                if(this.readyState == 4 && this.status == 200)
-                {
-                    // Typical action to be performed when the document is ready:
-                    document.getElementById("demo").innerHTML = xhttp.responseText;
-                }
-            };
-            xhttp.open("GET", "filename", true);
-            xhttp.send();
+
         }
 
         //Generate Credits
         var generatecredits_xmlhttprequest = new XMLHttpRequest();
-        function generate_credits()
+        function begin_generate_credits()
         {
             generatecredits_xmlhttprequest.onreadystatechange = function()
             {
                 if(this.readyState == 4 && this.status == 200)
                 {
-                    // Typical action to be performed when the document is ready:
-                    document.getElementById("demo").innerHTML = xhttp.responseText;
+                    //Store last parcela informacion
+                    generate_credits_last_percela_informacion = JSON.parse(generatecredits_xmlhttprequest.responseText)
+                    console.log(generate_credits_last_percela_informacion);
+                    generate_credits();
                 }
             };
             generatecredits_xmlhttprequest.open("GET", "/homelesscredits_server_get_next_parcela.php", true);
             generatecredits_xmlhttprequest.send();
+        }
+
+        function generate_credits()
+        {
+            let keep_attempting_to_generate_credits = 1;
+            while(keep_attempting_to_generate_credits == 1)
+            {
+                let string_to_rotate = generate_random_string(32);
+                const array_for_one_random_integer = new Uint32Array(1);
+                self.crypto.getRandomValues(array_for_one_random_integer);
+
+                string_to_rotate = rotate_string_swap_character_per_character_position(string_to_rotate, 1000000);
+
+                if(string_to_rotate[0] == "0")
+                {
+                    console.log(string_to_rotate);
+                    keep_attempting_to_generate_credits = 0;
+                    console.log("found level one parcela");
+                }
+            }
         }
         //END Generate Credits
 
@@ -162,7 +180,7 @@
 </head>
 <body onLoad="entry_function();">
 <div style="text-align:center;" id="balance">Loading Balance.</div>
-<div style="text-align:center;"><a href="javascript:void(0);" onClick="generate_credits();">Generate Credits</a></div>
+<div style="text-align:center;"><a href="javascript:void(0);" onClick="begin_generate_credits();">Generate Credits</a></div>
 <div id="parcela_informacion">
     Parcela Information<br/>
     HERE
