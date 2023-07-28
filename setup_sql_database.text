@@ -1,1 +1,1 @@
-create table parcela (id bigint NOT NULL, complete_hash varchar(32) NOT NULL, timestamp int NOT NULL, PRIMARY KEY (id));
+CREATE TABLE parcela (id BIGINT NOT NULL AUTO_INCREMENT, result_hash VARCHAR(32) NOT NULL, timestamp int NOT NULL, PRIMARY KEY (id));
