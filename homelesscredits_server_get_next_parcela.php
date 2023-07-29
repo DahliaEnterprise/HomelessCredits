@@ -13,13 +13,22 @@ $options = [
 ];
 $pdo = new PDO($dsn, $user, $pass, $options);
 
-
+$return_json_object = [];
+$return_json_object["parcela_informacion_available"] = -1;
 $stmt = $pdo->query('SELECT result_hash, timestamp FROM parcela ORDER BY timestamp DESC LIMIT 0,1;');
-while ($row = $stmt->fetch())
+$row = $stmt->fetch();
+if($stmt->rowCount() > 0)
 {
-    //Sanatized output TODO
+    //define output
+    $return_json_object["parcela_informacion_available"] = 1;
+    $return_json_object["result_hash"] = $row["result_hash"];
+    $return_json_object["timestamp"] = $row["timestamp"];
 
-    //Return sanatized output
-    echo json_encode($row);
+}else if($stmt->rowCount() == 0)
+{
+    $return_json_object["parcela_informacion_available"] = 0;
 }
+
+echo json_encode($return_json_object);
+
 ?>
