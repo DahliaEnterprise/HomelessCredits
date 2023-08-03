@@ -1,23 +1,25 @@
 // addEventListener is directly accessible in worker file
 addEventListener("message", event => {
 
-    let reduced_string = reduce_string("THISISATESTASWEHAVESOMESTEAMPUNKSHITGOINGONTHEGROUNDSOFTHEFUCKYOU", 32, 10000);
-    console.log(reduced_string);
-    //console.log(event.data);
+
+    console.log(event.data);
 
     let keep_attempting_to_generate = 1;
     while(keep_attempting_to_generate == 1)
     {
         //EMULATE string as if its a concaconated entry for approval by the chain.
-        let string_to_rotate = generate_random_string(1000);
-        const array_for_one_random_integer = new Uint32Array(1);
-        self.crypto.getRandomValues(array_for_one_random_integer);
+        let string_to_rotate = generate_random_string(32);
+
+        let concat_string_plus_nonce = event.data["concatconated_string"] + "" + string_to_rotate;
+        //console.log(concat_string_plus_nonce);
+        let reduced_string = reduce_string(concat_string_plus_nonce, 32, 10000);
+
 
         //Reduce string for hash rotation.
-        string_to_rotate = reduce_string(string_to_rotate, 32, 10000);
+        string_to_rotate = "" + reduced_string;
 
         string_to_rotate = rotate_string_swap_character_per_character_position(string_to_rotate, 500000);
-        console.log(string_to_rotate);
+
         let total_difficulty_to_obtain = event.data["difficulty"];
         let total_difficulty_detected = 0;
         let detect_difficulty_current_index = string_to_rotate.length - 1;
@@ -37,8 +39,7 @@ addEventListener("message", event => {
 
         if(total_difficulty_detected >= total_difficulty_to_obtain)
         {
-            console.log(total_difficulty_detected);
-            console.log(string_to_rotate);
+
             keep_attempting_to_generate = 0;
         }
 

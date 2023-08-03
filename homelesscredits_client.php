@@ -41,6 +41,7 @@ header('Pragma: no-cache');
                         let information_for_generatecredits_worker = [];
                         information_for_generatecredits_worker["first_parcela"] = 1;
                         information_for_generatecredits_worker["difficulty"] = 1;
+                        information_for_generatecredits_worker["concatconated_string"] = "TESTINGTESTINGTESTINGTESTINGTESTINGTESTINGTESTING";
                         generatecredits_worker = new Worker("http://localhost/homelesscredits_generate_credits_worker.js");
                         //Send the worker a message
                         generatecredits_worker.postMessage(information_for_generatecredits_worker);
