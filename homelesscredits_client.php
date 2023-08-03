@@ -1,3 +1,10 @@
+<?php
+header('Expires: Sun, 01 Jan 2014 00:00:00 GMT');
+header('Cache-Control: no-store, no-cache, must-revalidate');
+header('Cache-Control: post-check=0, pre-check=0', FALSE);
+header('Pragma: no-cache');
+
+?>
 <html>
 <head>
 
@@ -34,7 +41,7 @@
                         let information_for_generatecredits_worker = [];
                         information_for_generatecredits_worker["first_parcela"] = 1;
                         information_for_generatecredits_worker["difficulty"] = 1;
-                        generatecredits_worker = new Worker("/homelesscredits_generate_credits_worker.js");
+                        generatecredits_worker = new Worker("http://localhost/homelesscredits_generate_credits_worker.js");
                         //Send the worker a message
                         generatecredits_worker.postMessage(information_for_generatecredits_worker);
                         //Handle the message
@@ -50,7 +57,7 @@
                     //generate_credits();
                 }
             };
-            generatecredits_xmlhttprequest.open("GET", "/homelesscredits_server_get_next_parcela.php", true);
+            generatecredits_xmlhttprequest.open("GET", "http://localhost/homelesscredits_server_get_next_parcela.php", true);
             generatecredits_xmlhttprequest.send();
         }
 

@@ -1,16 +1,23 @@
 // addEventListener is directly accessible in worker file
 addEventListener("message", event => {
-    let reduced_string = reduce_or_expand_string("SDFJSDFSDFHSADFGDSFHSDFJSDFH77675DFGD43TTFSDSRWEFDFGDGEGREGDFDFESRERYIUOTRF5", 32, 500000);
 
-    console.log(event.data);
+    let reduced_string = reduce_string("THISISATESTASWEHAVESOMESTEAMPUNKSHITGOINGONTHEGROUNDSOFTHEFUCKYOU", 32, 10000);
+    console.log(reduced_string);
+    //console.log(event.data);
+
     let keep_attempting_to_generate = 1;
     while(keep_attempting_to_generate == 1)
     {
-        let string_to_rotate = generate_random_string(32);
+        //EMULATE string as if its a concaconated entry for approval by the chain.
+        let string_to_rotate = generate_random_string(1000);
         const array_for_one_random_integer = new Uint32Array(1);
         self.crypto.getRandomValues(array_for_one_random_integer);
 
+        //Reduce string for hash rotation.
+        string_to_rotate = reduce_string(string_to_rotate, 32, 10000);
+
         string_to_rotate = rotate_string_swap_character_per_character_position(string_to_rotate, 500000);
+        console.log(string_to_rotate);
         let total_difficulty_to_obtain = event.data["difficulty"];
         let total_difficulty_detected = 0;
         let detect_difficulty_current_index = string_to_rotate.length - 1;
@@ -27,6 +34,7 @@ addEventListener("message", event => {
                 keep_detecting_difficulty = 0;
             }
         }
+
         if(total_difficulty_detected >= total_difficulty_to_obtain)
         {
             console.log(total_difficulty_detected);
@@ -35,7 +43,6 @@ addEventListener("message", event => {
         }
 
     }
-
 
 });
 
@@ -111,45 +118,40 @@ function rotate_string_swap_character_per_character_position(string_to_rotate, i
     return output;
 }
 
-function reduce_or_expand_string(string_to_scale, target_size, iterations)
+function reduce_string(string_to_scale, target_size, iterations)
 {
-    //Reduce by every other character or expand by every other character
-    if(string_to_scale.length > target_size)
-    {
-        let iterations_exponentional = 2;
-        let string_to_scale_cursor_index = 0;
-        let reduced_string = "";
-        let continue_reducing_string = 1;
-        while(continue_reducing_string == 1)
-        {
-            //Move cursor in a ringbuffer fashion until target iterations have been aquired
+    //This function assumes that string_to_scale.length is greater than target_size.
+    //This function must reduce the string in a predictable manner. (no random)
 
-            let target_iterations = iterations_exponentional * (string_to_scale_cursor_index + 2);
-            console.log(target_iterations);
-            let iterations = 0;
-            while(iterations < target_iterations)
+    //Begin reducing.
+        let iterations_magnitude = 2;
+        let reduced_string = "";
+        let total_characters_appended_to_reduced_string = 0;
+        let string_to_scale_index = 0;
+        let keep_building_reduced_string = 1;
+        while(keep_building_reduced_string == 1)
+        {
+            let counter_of_iterations = 0;
+            while(counter_of_iterations < (iterations_magnitude * iterations))
             {
-                string_to_scale_cursor_index = string_to_scale_cursor_index + 1;
-                if(string_to_scale_cursor_index == string_to_scale.length)
+                string_to_scale_index = string_to_scale_index + 1;
+                if(string_to_scale_index == string_to_scale.length)
                 {
-                    string_to_scale_cursor_index = 0;
+                    string_to_scale_index = 0;
                 }
-                iterations = iterations + 1;
+                counter_of_iterations = counter_of_iterations + 1;
             }
-                //Now that the cursor is moved, pull character
-                reduced_string = reduced_string + "" + string_to_scale[string_to_scale_cursor_index];
-                iterations_exponentional = iterations_exponentional + 1;
-            //Stop reducing string?
-            if(reduced_string.length == target_size)
+
+            reduced_string = reduced_string + string_to_scale[string_to_scale_index];
+            iterations_magnitude = iterations_magnitude + 1;
+
+            total_characters_appended_to_reduced_string = total_characters_appended_to_reduced_string + 1;
+            if(total_characters_appended_to_reduced_string == target_size)
             {
-                continue_reducing_string = 0;
+                keep_building_reduced_string = 0;
             }
         }
-        console.log(reduced_string);
-    }else if(string_to_scale.length < target_size)
-    {
-        console.log("TODO EXPAND");
-    }
+    return reduced_string;
 }
 
 //Random Assistive Functions
