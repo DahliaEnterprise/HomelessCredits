@@ -48,7 +48,7 @@ header('Pragma: no-cache');
                         information_for_generatecredits_worker["difficulty"] = 1;
                         information_for_generatecredits_worker["concatconated_string"] = JSON.stringify(parcela_information);
                         //generatecredits_worker = new Worker("http://localhost/homelesscredits_generate_credits_worker.js");
-                        generatecredits_worker = new Worker("http://localhost/homelesscredits_generate_credits_worker_binaryprocessor.js");
+                        generatecredits_worker = new Worker("http://localhost/homelesscredits_generate_credits_worker_binaryprocess.js");
                         //Send the worker a message
                         generatecredits_worker.postMessage(information_for_generatecredits_worker);
                         //Handle the message
