@@ -1,0 +1,50 @@
+<html>
+    <head>
+        <script>
+            //Define allowed characters for the eight bit range
+            const character_table = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789!@#$%^&*()-_=+{}[]~`;:'\"<>,.?";
+
+            //Character to int 8 map
+            function character_to_inteight(character_to_convert)
+            {
+                let output = -1;
+
+
+                //iteration until character is found, then output the index position as an integer
+                let index = 0;
+                let index_found = -1;
+                while(index < character_table.length)
+                {
+                    if(character_table[index] == character_to_convert)
+                    {
+                        index_found = index;
+                        index = character_table.length;
+                    }
+                    index = index + 1;
+                }
+
+                if(index_found > -1)
+                {
+                    output = index_found;
+                }
+
+                return output;
+            }
+
+            function entry_function()
+            {
+                let input_string = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789!@#$%^&*()-_=+{}[]~`;:'\"<>,.?";
+                //UNIT TEST
+                let index = 0;
+                while(index < input_string.length)
+                {
+                    console.log(character_to_inteight(input_string[index]));
+                    index = index + 1;
+                }
+            }
+        </script>
+    </head>
+    <body onLoad="entry_function();">
+
+    </body>
+</html>

@@ -1,6 +1,6 @@
 // addEventListener is directly accessible in worker file
 addEventListener("message", event => {
-
+console.log("MESSAGE");
     let keep_attempting_to_generate = 1;
     while(keep_attempting_to_generate == 1)
     {
@@ -16,7 +16,7 @@ addEventListener("message", event => {
         string_to_rotate = "" + reduced_string;
 
         string_to_rotate = rotate_string_swap_character_per_character_position(string_to_rotate, 500000);
-
+        console.log(string_to_rotate);
         let total_difficulty_to_obtain = event.data["difficulty"];
         let total_difficulty_detected = 0;
         let detect_difficulty_current_index = string_to_rotate.length - 1;
