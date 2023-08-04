@@ -38,11 +38,17 @@ header('Pragma: no-cache');
                     console.log(generate_credits_last_parcela_informacion["parcela_informacion_available"]);
                     if(generate_credits_last_parcela_informacion["parcela_informacion_available"] == 0)
                     {
+                        let parcela_information = [];
+                        parcela_information["parcela_index"] = 1;
+                        parcela_information["timestamp"] = Math.floor(Date.now()/1000);
+                        parcela_information["transactions"] = [];
+                        console.log(parcela_information);
                         let information_for_generatecredits_worker = [];
                         information_for_generatecredits_worker["first_parcela"] = 1;
                         information_for_generatecredits_worker["difficulty"] = 1;
-                        information_for_generatecredits_worker["concatconated_string"] = "TESTINGTESTINGTESTINGTESTINGTESTINGTESTINGTESTING";
-                        generatecredits_worker = new Worker("http://localhost/homelesscredits_generate_credits_worker.js");
+                        information_for_generatecredits_worker["concatconated_string"] = JSON.stringify(parcela_information);
+                        //generatecredits_worker = new Worker("http://localhost/homelesscredits_generate_credits_worker.js");
+                        generatecredits_worker = new Worker("http://localhost/homelesscredits_generate_credits_worker_binaryprocessor.js");
                         //Send the worker a message
                         generatecredits_worker.postMessage(information_for_generatecredits_worker);
                         //Handle the message

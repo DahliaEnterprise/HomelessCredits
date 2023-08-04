@@ -1,9 +1,6 @@
 // addEventListener is directly accessible in worker file
 addEventListener("message", event => {
 
-
-    console.log(event.data);
-
     let keep_attempting_to_generate = 1;
     while(keep_attempting_to_generate == 1)
     {
@@ -47,7 +44,7 @@ addEventListener("message", event => {
 
 });
 
-const alphabet_table = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
+const alphabet_table = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789{}\"' ";
 
 
 //Rotate character based on iterations amongst the alphabet table
