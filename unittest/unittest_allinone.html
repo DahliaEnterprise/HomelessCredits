@@ -2,8 +2,21 @@
     <head>
         <script>
             //Define allowed characters for the eight bit range
-            const character_table = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789!@#$%^&*()-_=+{}[]~`;:'\"<>,.?";
+            const character_table = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789!@#$%^&*()-_=+{}[]~`;:'\"<>,. ?";
 
+            function string_to_hex(input_string)
+            {
+                let output_hex_string = '';
+                for (let i = 0; i < input_string.length; i++)
+                {
+                    const character_int_code = input_string.charCodeAt(i);
+                    const hex_value = character_int_code.toString(16).padStart(2, '0'); // Pad with 0 if needed
+                    output_hex_string += hex_value;
+                }
+                return output_hex_string;
+            }
+
+            /* MUTED MAY NOT BE NEESSECARY
             //Character to int 8 map
             function character_to_inteight(character_to_convert)
             {
@@ -30,15 +43,16 @@
 
                 return output;
             }
+            */
 
             function entry_function()
             {
-                let input_string = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789!@#$%^&*()-_=+{}[]~`;:'\"<>,.?";
+                let input_string = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789!@#$%^&*()-_=+{}[]~`;:'\"<>,. ?";
                 //UNIT TEST
                 let index = 0;
                 while(index < input_string.length)
                 {
-                    console.log(character_to_inteight(input_string[index]));
+                    console.log(string_to_hex(input_string[index]));
                     index = index + 1;
                 }
             }
