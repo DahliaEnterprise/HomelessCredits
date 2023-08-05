@@ -26,7 +26,7 @@ console.log("MESSAGE");
             if(string_to_rotate[detect_difficulty_current_index] == "0")
             {
                 console.log("zero");
-                console.log(string_to_rotate);
+                console.log(string_to_hex(string_to_rotate));
                 detect_difficulty_current_index = detect_difficulty_current_index - 1;
                 total_difficulty_detected = total_difficulty_detected + 1;
             }else{
@@ -39,13 +39,23 @@ console.log("MESSAGE");
 
             keep_attempting_to_generate = 0;
         }
-
     }
 
 });
 
-const alphabet_table = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789{}\"' ";
+const alphabet_table  = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789!@#$%^&*()-_=+{}[]~`;:'\"<>,. ?";
 
+function string_to_hex(input_string)
+{
+    let output_hex_string = '';
+    for (let i = 0; i < input_string.length; i++)
+    {
+        const character_int_code = input_string.charCodeAt(i);
+        const hex_value = character_int_code.toString(16).padStart(2, '0'); // Pad with 0 if needed
+        output_hex_string += hex_value;
+    }
+    return output_hex_string;
+}
 
 //Rotate character based on iterations amongst the alphabet table
 function rotate_character(character, iterations)

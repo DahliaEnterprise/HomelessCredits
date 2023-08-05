@@ -4,6 +4,39 @@
             //Define allowed characters for the eight bit range
             const character_table = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789!@#$%^&*()-_=+{}[]~`;:'\"<>,. ?";
 
+            //remove one character and return string
+            function remove_one_character_at_index(string, index)
+            {
+                /* NOTE:This function assumes the index is within range */
+
+                //Initialize
+                let output = "";
+
+                //Execute
+                if(index == 0)
+                {
+                    //Index zero
+                    output = string.substr(1, string.length-1);
+
+                }else if(index > 0 && index < string.length-1)
+                {
+                    //Index above zero however before the end of string
+                    let composed_string = "";
+                    composed_string = string.substr(0, index);
+                    composed_string = composed_string + string.substr((index + 1), (string.length - index));
+                    output = composed_string;
+                }else if(index == (string.length - 1))
+                {
+                    let composed_string = "";
+                    composed_string = string.substr((string.length - 1), 1);
+                    output = composed_string;
+                }
+
+                //Return output
+                return output;
+            }
+
+            //String to hex
             function string_to_hex(input_string)
             {
                 let output_hex_string = '';
@@ -16,45 +49,133 @@
                 return output_hex_string;
             }
 
-            /* MUTED MAY NOT BE NEESSECARY
-            //Character to int 8 map
-            function character_to_inteight(character_to_convert)
+            //Rotate character
+            function change_character_based_on_additions_amongst_character_table_index(character, iterations)
             {
-                let output = -1;
+                let output = "";
 
-
-                //iteration until character is found, then output the index position as an integer
+                //get current character table index
+                let current_character_table_index = 0;
                 let index = 0;
-                let index_found = -1;
                 while(index < character_table.length)
                 {
-                    if(character_table[index] == character_to_convert)
+                    if(character_table[index] == character)
                     {
-                        index_found = index;
+                        current_character_table_index = index;
                         index = character_table.length;
+                    }
+
+                    //next to check
+                    index = index + 1;
+                }
+
+                //get desired character
+                index = 0;
+                while(index < iterations)
+                {
+                    current_character_table_index = current_character_table_index + 1;
+                    if(current_character_table_index == character_table.length)
+                    {
+                        current_character_table_index = 0;
                     }
                     index = index + 1;
                 }
 
-                if(index_found > -1)
-                {
-                    output = index_found;
-                }
+                output = character_table[current_character_table_index];
 
                 return output;
             }
-            */
+
+            function apply_self_additive_rotation(string_to_hash, iterations)
+            {
+
+            }
+
+            function reduce_string(string_to_scale, target_size, iterations)
+            {
+                //This function assumes that string_to_scale.length is greater than target_size.
+                //This function must reduce the string in a predictable manner. (no random)
+
+                //Begin reducing.
+                    let iterations_magnitude = 2;
+                    let reduced_string = "";
+                    let total_characters_appended_to_reduced_string = 0;
+                    let string_to_scale_index = 0;
+                    let keep_building_reduced_string = 1;
+                    while(keep_building_reduced_string == 1)
+                    {
+                        let counter_of_iterations = 0;
+                        while(counter_of_iterations < (iterations_magnitude * iterations))
+                        {
+                            string_to_scale_index = string_to_scale_index + 1;
+                            if(string_to_scale_index == string_to_scale.length)
+                            {
+                                string_to_scale_index = 0;
+                            }
+                            counter_of_iterations = counter_of_iterations + 1;
+                        }
+
+                        reduced_string = reduced_string + string_to_scale[string_to_scale_index];
+                        string_to_scale = remove_one_character_at_index(string_to_scale, string_to_scale_index);
+                        iterations_magnitude = iterations_magnitude + 1;
+
+                        total_characters_appended_to_reduced_string = total_characters_appended_to_reduced_string + 1;
+                        if(total_characters_appended_to_reduced_string == target_size)
+                        {
+                            keep_building_reduced_string = 0;
+                        }
+                    }
+                return reduced_string;
+            }
+
+            //High level functioning
+            function string_to_homelesscredits_hash(string_to_hash, iterations)
+            {
+                //NOTE: Set the iterations that must be the same amongst systems and shouldn't change, ever.
+                //Initialize
+                let output = "";
+
+                //Before reducing, the entire string must be altered using the string it self as a the modifier, this is so
+                let self_additive_rotation_result = apply_self_additive_rotation(string_to_hash, iterations);
+
+                //Reduce string
+                let reduced_string = reduce_string(string_to_hash, 16, iterations);
+
+                //Rotate
+                let rotated_string = "";
+
+                //change each character
+                let index = 0;
+                while(index < reduced_string.length)
+                {
+                    let changed_character = change_character_based_on_additions_amongst_character_table_index(reduced_string[index], ((index + 2) * iterations));
+                    rotated_string = rotated_string + changed_character;
+
+                    //console.log(string_to_hex(changed_character));
+
+                    //next character to change
+                    index = index + 1;
+                }
+
+                let hashed_string = string_to_hex(rotated_string);
+
+                output = hashed_string;
+
+                //Return
+                return output;
+            }
+
 
             function entry_function()
             {
-                let input_string = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789!@#$%^&*()-_=+{}[]~`;:'\"<>,. ?";
-                //UNIT TEST
-                let index = 0;
-                while(index < input_string.length)
-                {
-                    console.log(string_to_hex(input_string[index]));
-                    index = index + 1;
-                }
+                //Create a string to hash
+                console.log("1");
+                let input_string = "abcdefghijkl mnopqrst uvw xyzABCDEF GHIJKLMNOPQRS TUVWXYZ0123456789!@#$%^&*()-_=+{}[]~`;:'\"<>,. ?abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789!@#$%^&*()-_=+{}[]~`;:'\"<>,. ?abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789!@#$%^&*()-_=+{}[]~`;:'\"<>,. ?abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789!@#$%^&*()-_=+{}[]~`;:'\"<>,. ?abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789!@#$%^&*()-_=+{}[]~`;:'\"<>,. ?abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789!@#$%^&*()-_=+{}[]~`;:'\"<>,. ?abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789!@#$%^&*()-_=+{}[]~`;:'\"<>,. ?";
+                console.log("2");
+                let input_string_concat_with_timestamp_as_nonce = input_string + "" + Date.now();
+                console.log("3");
+                let hashed_string = string_to_homelesscredits_hash(input_string_concat_with_timestamp_as_nonce, 1000);
+                console.log(hashed_string);
             }
         </script>
     </head>
