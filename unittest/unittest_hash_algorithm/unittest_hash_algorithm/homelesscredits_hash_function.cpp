@@ -26,7 +26,7 @@ void homelesscredits_hash_function::apply_self_additive_rotation(QString string_
 
     //For every character consecutively rotate using also every character
     int total_characters_appended_to_result = 0;
-    while(total_characters_appended_to_result <1)
+    while(total_characters_appended_to_result < 2)
     {
         QString character_to_rotate = QString("%1").arg(source_string.at(total_characters_appended_to_result));
 
@@ -34,12 +34,15 @@ void homelesscredits_hash_function::apply_self_additive_rotation(QString string_
         while(source_string_index < source_string.length())
         {
             int total_iterations_to_rotate = get_character_index(character_to_rotate);
-            total_iterations_to_rotate = (source_string_index + 2) * (total_iterations_to_rotate + 2);
-            //Total_iterations_to_rotate = total_iterations_to_rotate * iterations;
+            total_iterations_to_rotate = (total_characters_appended_to_result + 2) * (source_string_index + 2) * (total_iterations_to_rotate + 2);
+
+            total_iterations_to_rotate = total_iterations_to_rotate * iterations;
+            qDebug() << total_iterations_to_rotate << " | " << source_string_index;
             int character_map_index = rotate_character(character_to_rotate, total_iterations_to_rotate);
 
             character_to_rotate = QString("%1").arg(character_map.mid(character_map_index, 1));
-qDebug() << character_map_index;
+            //qDebug() << character_map_index;
+
             //next character
             source_string_index = source_string_index + 1;
         }
@@ -112,4 +115,11 @@ int homelesscredits_hash_function::rotate_character(QString character_to_rotate,
     }
 
     return output;
+}
+
+void homelesscredits_hash_function::unit_test_rotate_character()
+{
+    //
+    int character_map_index_of_rotated_character = this->rotate_character(QString("a"), 27);
+    qDebug() << character_map_index_of_rotated_character;
 }

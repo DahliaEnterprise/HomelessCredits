@@ -15,7 +15,7 @@ public:
     void apply_self_additive_rotation(QString string_to_hash, qint32 iterations);
     int get_character_index(QString character_to_rotate);
     int rotate_character(QString character_to_rotate, qint32 iterations);
-
+    void unit_test_rotate_character();
 
 private:
     QString character_map;
