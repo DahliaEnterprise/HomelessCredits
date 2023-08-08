@@ -30,7 +30,6 @@ void homelesscredits_hash_function::apply_self_additive_rotation(QString string_
     {
         //Initialize character to rotate variable
         QString character_to_rotate = QString("%1").arg(source_string.at(total_characters_appended_to_result));
-        qDebug() << character_to_rotate;
 
         //Rotate character by every character(index) times the total characters produced(plus 2) times the source string index(plus 2)
         int additive_source_index = 0;
@@ -41,7 +40,7 @@ void homelesscredits_hash_function::apply_self_additive_rotation(QString string_
             total_times_to_rotate = character_index_to_rotate + 2;
             total_times_to_rotate = total_times_to_rotate * (total_characters_appended_to_result + 2);
             total_times_to_rotate = total_times_to_rotate * (additive_source_index + 2);
-            qDebug() << total_times_to_rotate;
+
             int index_of_rotated_character = rotate_character(source_string.mid(additive_source_index, 1), total_times_to_rotate);
             character_to_rotate.clear();
             character_to_rotate = QString("%1").arg(character_map.mid(index_of_rotated_character, 1));
@@ -50,33 +49,6 @@ void homelesscredits_hash_function::apply_self_additive_rotation(QString string_
             additive_source_index = additive_source_index + 1;
         }
 
-        /*
-        int character_map_index_of_character_to_rotate = this->get_character_index(source_string.mid());
-        character_map_index_of_character_to_rotate = character_map_index_of_character_to_rotate + 2;
-
-        int index_of_rotated_character = rotate_character(character_to_rotate, character_map_index_of_character_to_rotate);
-        character_to_rotate = QString("%1").arg(character_map.mid(index_of_rotated_character, 1));
-        */
-        //character_to_rotate = QString("%1").arg(character_map.mid(rotate_character(character_to_rotate, this->get_character_index(character_to_rotate)), 1));
-
-        /*
-        int source_string_index = 0;
-        while(source_string_index < source_string.length())
-        {
-            qint32 total_iterations_to_rotate = get_character_index(character_to_rotate);
-            total_iterations_to_rotate = (total_characters_appended_to_result + 2) * (source_string_index + 2) * (total_iterations_to_rotate + 2);
-
-            total_iterations_to_rotate = total_iterations_to_rotate * iterations;
-
-            int character_map_index = rotate_character(character_to_rotate, total_iterations_to_rotate);
-            qDebug() << total_iterations_to_rotate << " | " << source_string_index << character_map_index;
-
-            character_to_rotate = QString("%1").arg(character_map.mid(character_map_index, 1));
-            //qDebug() << character_map_index;
-
-            //next character
-            source_string_index = source_string_index + 1;
-        }*/
 
         result_string = result_string.append(character_to_rotate);
 
