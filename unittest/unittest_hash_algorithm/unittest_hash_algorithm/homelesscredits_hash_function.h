@@ -12,9 +12,12 @@ public:
 
     void initialize_hash_function(QString set_character_map);
     void string_to_homelesscredits_hash(QString string_to_hash, qint32 iterations);
-    void apply_self_additive_rotation(QString string_to_hash, qint32 iterations);
+    QMap<QString, QVariant> apply_self_additive_rotation(QString string_to_hash);
     int get_character_index(QString character_to_rotate);
     int rotate_character(QString character_to_rotate, qint32 iterations);
+    QString reduce_string(QString additive_string, qint32 target_size, qint32 iterations);
+
+
     void unit_test_rotate_character();
 
 private:
