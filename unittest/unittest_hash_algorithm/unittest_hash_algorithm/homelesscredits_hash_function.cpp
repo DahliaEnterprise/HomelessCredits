@@ -40,6 +40,7 @@ void homelesscredits_hash_function::apply_self_additive_rotation(QString string_
             total_times_to_rotate = character_index_to_rotate + 2;
             total_times_to_rotate = total_times_to_rotate * (total_characters_appended_to_result + 2);
             total_times_to_rotate = total_times_to_rotate * (additive_source_index + 2);
+            total_times_to_rotate = total_times_to_rotate * iterations;
 
             int index_of_rotated_character = rotate_character(source_string.mid(additive_source_index, 1), total_times_to_rotate);
             character_to_rotate.clear();

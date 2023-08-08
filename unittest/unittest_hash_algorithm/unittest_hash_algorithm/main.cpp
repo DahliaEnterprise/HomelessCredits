@@ -15,7 +15,7 @@ int main(int argc, char *argv[])
     homelesscredits_hash_function * hash = new homelesscredits_hash_function();
     hash->initialize_hash_function(character_table);
     //hash->unit_test_rotate_character();
-    hash->string_to_homelesscredits_hash(unittest_string_to_hash, 1);
+    hash->string_to_homelesscredits_hash(unittest_string_to_hash, 100);
 
 
 
