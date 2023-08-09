@@ -124,49 +124,45 @@ int homelesscredits_hash_function::rotate_character(QString character_to_rotate,
     return output;
 }
 
-QString homelesscredits_hash_function::reduce_string(QString additive_string, qint32 target_size, qint32 iterations)
+QString homelesscredits_hash_function::reduce_string(QString additive_string, int target_size, qint32 iterations)
 {
     QString output = QString();
 
     //This function assumes that string_to_scale.length is greater than target_size.
     //This function must reduce the string in a predictable manner. (no random)
-    qint32 iterations_magnitude = 2;
+    qDebug() << additive_string.length() << " | " << target_size;
     QString reduced_string = QString();
-    qint32 total_characters_appended_to_reduced_string = 0;
-    qint32 string_to_scale_index = 0;
-    qint32 keep_building_reduced_string = 1;
-    while(keep_building_reduced_string == 1)
+    int additive_string_index = 0;
+    int total_characters_produced = 0;
+    while(total_characters_produced < target_size)
     {
-        qint32 counter_of_iterations = 0;
-        while(counter_of_iterations < (iterations_magnitude * iterations))
+        qint32 total_iterations_consumed = 0;
+        while(total_iterations_consumed < ((total_iterations_consumed + 2) * iterations))
         {
-            string_to_scale_index = string_to_scale_index + 1;
-            if(string_to_scale_index == additive_string.length())
+            additive_string_index = additive_string_index + 1;
+            if(additive_string_index == additive_string.length())
             {
-                string_to_scale_index = 0;
+                additive_string_index = 0;
             }
-            counter_of_iterations = counter_of_iterations + 1;
+            total_iterations_consumed = total_iterations_consumed + 1;
+            //qDebug() << additive_string_index << " | " << total_iterations_consumed;
         }
 
-        reduced_string = QString("%1%2").arg(reduced_string).arg(additive_string.mid(string_to_scale_index, 1));
-        additive_string = additive_string.remove(string_to_scale_index);
-        iterations_magnitude = iterations_magnitude + 1;
-
-        total_characters_appended_to_reduced_string = total_characters_appended_to_reduced_string + 1;
-        if(total_characters_appended_to_reduced_string == target_size)
-        {
-            keep_building_reduced_string = 0;
-        }
+        reduced_string.append(additive_string.mid(additive_string_index, 1));
+        additive_string = additive_string.remove(additive_string_index, 1);
+        //qDebug() << reduced_string << " | " << additive_string << " | " << additive_string_index;
+        total_characters_produced = total_characters_produced + 1;
     }
-
-    output = QString("%1").arg(reduced_string);
-
+    output = reduced_string;
+    qDebug() << output;
     return output;
 }
 
 void homelesscredits_hash_function::unit_test_rotate_character()
 {
-    //
+    /*
     int character_map_index_of_rotated_character = this->rotate_character(QString("a"), (25 * 100000));
     qDebug() << character_map.mid(character_map_index_of_rotated_character, 1);
+    */
+    qDebug() << this->reduce_string(QString("abc"), 1, 3);
 }
