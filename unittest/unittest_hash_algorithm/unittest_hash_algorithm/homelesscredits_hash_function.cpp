@@ -130,7 +130,6 @@ QString homelesscredits_hash_function::reduce_string(QString additive_string, in
 
     //This function assumes that string_to_scale.length is greater than target_size.
     //This function must reduce the string in a predictable manner. (no random)
-    qDebug() << additive_string.length() << " | " << target_size;
     QString reduced_string = QString();
     int additive_string_index = 0;
     int total_characters_produced = 0;

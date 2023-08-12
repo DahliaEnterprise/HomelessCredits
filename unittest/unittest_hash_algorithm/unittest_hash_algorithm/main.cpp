@@ -11,7 +11,7 @@ int main(int argc, char *argv[])
 
     QString string_to_hash = QString("sometimeswhenthecosasbegettinallwilditwillsettlesse3u");
     QDateTime time1 = QDateTime::currentDateTime();
-    string_to_hash.append(QString::number(time1.toSecsSinceEpoch(), 10));
+   string_to_hash.append(QString::number(time1.toSecsSinceEpoch(), 10));
     QString unittest_string_to_hash = QString("aaaa");
 
     //Define input string (typically this is intended for the combined textual information such as: block number, list of transaction information, timestamp)
