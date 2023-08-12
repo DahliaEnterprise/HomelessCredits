@@ -1,8 +1,10 @@
 #ifndef SOLO_VENTANA_H
 #define SOLO_VENTANA_H
 
-#include "ventana_solo_de_clases/solo_ventana_lista_de_botones.h"
+#include "solo_ventana_lista_de_botones.h"
 #include <QWidget>
+#include <QBoxLayout>
+#include <QDebug>
 
 class solo_ventana : public QWidget
 {
@@ -13,8 +15,12 @@ public:
 
 private:
     solo_ventana_lista_de_botones * lista_de_botones;
+    QBoxLayout * layout;
 
 signals:
+
+public slots:
+    void boton_presionado(QString button_title);
 
 };
 

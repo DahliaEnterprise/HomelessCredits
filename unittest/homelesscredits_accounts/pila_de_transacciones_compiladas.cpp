@@ -9,4 +9,5 @@ pila_de_transacciones_compiladas::pila_de_transacciones_compiladas(QObject *pare
 void pila_de_transacciones_compiladas::inicializar()
 {
     transaccions = new QHash<qint32, QJsonObject>();
+
 }
