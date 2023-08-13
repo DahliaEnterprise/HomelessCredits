@@ -1,4 +1,4 @@
-QT       += core gui
+QT       += core gui network
 
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 
@@ -9,13 +9,17 @@ CONFIG += c++11
 #DEFINES += QT_DISABLE_DEPRECATED_BEFORE=0x060000    # disables all the APIs deprecated before Qt 6.0.0
 
 SOURCES += \
+    administrador_de_conexiones_tcp.cpp \
+    diseno_de_estado_de_conexion.cpp \
     main.cpp \
     solo_ventana.cpp \
-    ventana_solo_de_clases/solo_ventana_lista_de_botones.cpp
+    solo_ventana_lista_de_botones.cpp
 
 HEADERS += \
+    administrador_de_conexiones_tcp.h \
+    diseno_de_estado_de_conexion.h \
     solo_ventana.h \
-    ventana_solo_de_clases/solo_ventana_lista_de_botones.h
+    solo_ventana_lista_de_botones.h
 
 FORMS +=
 
