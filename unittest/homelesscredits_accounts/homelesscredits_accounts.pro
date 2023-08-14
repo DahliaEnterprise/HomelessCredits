@@ -11,6 +11,7 @@ SOURCES += \
         bufer_de_un_mensaje.cpp \
         cabeza.cpp \
         el_coordinador_tcp.cpp \
+        estado_de_el_enlace.cpp \
         main.cpp \
         pila_de_transacciones_compiladas.cpp
 
@@ -23,5 +24,6 @@ HEADERS += \
     bufer_de_un_mensaje.h \
     cabeza.h \
     el_coordinador_tcp.h \
+    estado_de_el_enlace.h \
     pila_de_transacciones_compiladas.h
 

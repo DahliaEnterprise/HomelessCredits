@@ -2,6 +2,7 @@
 #define EL_COORDINADOR_TCP_H
 
 #include "bufer_de_un_mensaje.h"
+#include "estado_de_el_enlace.h"
 
 #include <QObject>
 #include <QTcpServer>
@@ -20,6 +21,8 @@ private:
     QTcpServer * server;
     QVector<QTcpSocket*> * lista_de_conexcion_tcp;
     QHash<QTcpSocket *, bufer_de_un_mensaje *> * lista_de_buferes_asociativos;
+    QHash<QTcpSocket *, estado_de_el_enlace *> * lista_de_estado_de_enlace_asociativo;
+    QByteArray encapsulacion_identificador;
 
 signals:
 

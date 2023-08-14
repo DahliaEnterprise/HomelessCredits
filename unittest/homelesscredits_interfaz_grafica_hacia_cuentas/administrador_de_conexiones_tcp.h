@@ -3,6 +3,8 @@
 
 #include <QObject>
 #include <QTcpSocket>
+#include <QJsonObject>
+#include <QJsonDocument>
 
 class administrador_de_conexiones_tcp : public QObject
 {

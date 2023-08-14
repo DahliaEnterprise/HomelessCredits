@@ -9,7 +9,7 @@ int main(int argc, char *argv[])
     QString character_table = QString("abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789!@#$%^&*()-_=+{}[]~`;:'\"<>,. ?");
     QString unittest_character_table = QString("abcd");
 
-    QString string_to_hash = QString("sometimeswhenthecosasbegettinallwilditwillsettlesse3u");
+    QString string_to_hash = QString("este es el identificador para el comienzo y el final de un mensaje");
     QDateTime time1 = QDateTime::currentDateTime();
    string_to_hash.append(QString::number(time1.toSecsSinceEpoch(), 10));
     QString unittest_string_to_hash = QString("aaaa");
