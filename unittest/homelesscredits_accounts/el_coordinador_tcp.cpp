@@ -33,7 +33,7 @@ void el_coordinador_tcp::new_connection()
             lista_de_buferes_asociativos->insert(proximo_conexion, nuevo_bufer);
 
         estado_de_el_enlace * enlace_de_referencia = new estado_de_el_enlace();
-        enlace_de_referencia->inicializar();
+        enlace_de_referencia->inicializar(proximo_conexion, encapsulacion_identificador);
 
             //Make association
             lista_de_estado_de_enlace_asociativo->insert(proximo_conexion, enlace_de_referencia);
@@ -51,18 +51,14 @@ void el_coordinador_tcp::ready_read()
     if(socket)
     {
          QByteArray data = socket->readAll();
-         qDebug() << data;
          // Process the received data
          bufer_de_un_mensaje * bufer = lista_de_buferes_asociativos->value(socket);
          bufer->anadir_al_bufer(data);
 
          //check if there is an entire message arrived
          int  mensajes_totales = bufer->obtener_el_total_de_mensajes_disponibles();
-         qDebug() << mensajes_totales;
          if(mensajes_totales > 0)
          {
-             qDebug() << mensajes_totales;
-             qDebug() << bufer->obtener_el_siguiente_mensaje();
              //Process next message
              estado_de_el_enlace * enlace_de_referencia = lista_de_estado_de_enlace_asociativo->value(socket);
              enlace_de_referencia->mensaje_de_proceso(bufer->obtener_el_siguiente_mensaje());

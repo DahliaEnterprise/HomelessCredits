@@ -30,9 +30,20 @@ int bufer_de_un_mensaje::obtener_el_total_de_mensajes_disponibles()
 
 QByteArray bufer_de_un_mensaje::obtener_el_siguiente_mensaje()
 {
-    qDebug() << "bufer:" << bufer;
     QString amortiguador_como_bufer = QString::fromStdString(bufer.toStdString());
     QStringList lista_de_mensajes = amortiguador_como_bufer.split(encapsulacion_identificador);
-    qDebug() << "1:" << lista_de_mensajes.at(0);
-    return lista_de_mensajes.at(0).toUtf8();
+    int fondo_indexado = -1;
+    int indice = 0;
+    while(indice < lista_de_mensajes.size())
+    {
+        if(lista_de_mensajes.at(indice).size() != 0)
+        {
+            fondo_indexado = indice;
+            indice = lista_de_mensajes.size();
+        }else{
+            indice = indice + 1;
+        }
+    }
+
+    return lista_de_mensajes.at(fondo_indexado).toUtf8();
 }

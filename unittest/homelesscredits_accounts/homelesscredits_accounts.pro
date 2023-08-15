@@ -13,7 +13,8 @@ SOURCES += \
         el_coordinador_tcp.cpp \
         estado_de_el_enlace.cpp \
         main.cpp \
-        pila_de_transacciones_compiladas.cpp
+        pila_de_transacciones_compiladas.cpp \
+        subproceso_de_trabajo_sobre_el_procesamiento_de_mensajes.cpp
 
 # Default rules for deployment.
 qnx: target.path = /tmp/$${TARGET}/bin
@@ -25,5 +26,6 @@ HEADERS += \
     cabeza.h \
     el_coordinador_tcp.h \
     estado_de_el_enlace.h \
-    pila_de_transacciones_compiladas.h
+    pila_de_transacciones_compiladas.h \
+    subproceso_de_trabajo_sobre_el_procesamiento_de_mensajes.h
 
