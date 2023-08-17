@@ -5,6 +5,7 @@
 #include <QByteArray>
 #include <QDebug>
 #include <QtMath>
+#include <QMap>
 
 class bufer_de_un_mensaje : public QObject
 {
@@ -15,6 +16,7 @@ public:
     void anadir_al_bufer(QByteArray datos_entrantes);
     int obtener_el_total_de_mensajes_disponibles();
     QByteArray obtener_el_siguiente_mensaje();
+    void eliminar_el_mensaje_completo_mas_reciente();
 
 private:
     QByteArray encapsulacion_identificador;

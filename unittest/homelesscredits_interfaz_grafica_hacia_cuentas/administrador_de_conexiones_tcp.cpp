@@ -28,5 +28,7 @@ void administrador_de_conexiones_tcp::conectarse_al_servidor_de_contabilidad()
     mensaje.append("7d5f44727224662a5062623522356076");
     controlador_de_conexion_tcp->write(mensaje.toUtf8());
 
+    controlador_de_conexion_tcp->waitForReadyRead();
+    qDebug() << controlador_de_conexion_tcp->readAll();
 
 }

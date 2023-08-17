@@ -47,3 +47,19 @@ QByteArray bufer_de_un_mensaje::obtener_el_siguiente_mensaje()
 
     return lista_de_mensajes.at(fondo_indexado).toUtf8();
 }
+
+void bufer_de_un_mensaje::eliminar_el_mensaje_completo_mas_reciente()
+{
+    //Detectar que existe un mensaje completo
+    if(mensajes_totales > 0)
+    {
+        //Eliminar el mensaje y el encapsulado
+        int start_index = bufer.indexOf(encapsulacion_identificador, 0);
+        int end_index = bufer.indexOf(encapsulacion_identificador, (start_index + encapsulacion_identificador.length()));
+
+        bufer.remove(start_index, (end_index - start_index));
+
+        qDebug() << "bufer:" << bufer;
+    }
+}
+
