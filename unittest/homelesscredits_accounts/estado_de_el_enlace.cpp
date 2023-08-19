@@ -33,7 +33,16 @@ void estado_de_el_enlace::mensaje_de_proceso(QByteArray mensaje_a_procesar)
     //If(mensaje_a_procesar == "acción"){ //trabajo }
     //conectado_al_servicio = 4;
     //se recibió el mensaje de establecer conexión
-    emit enviar_a_subproceso_con_respecto_al_establecimiento_de_una_conexion();
+    QJsonDocument jdoc = QJsonDocument::fromJson(mensaje_a_procesar, nullptr);
+    QJsonObject jobj = jdoc.object();
+    QString solicitar_value = jobj.value("solicitar").toString();
+    if(solicitar_value.compare("establecer_conexion") == 0)
+    {
+        emit enviar_a_subproceso_con_respecto_al_establecimiento_de_una_conexion();
+    }else if(solicitar_value.compare("el_carpeta_de_transacciones_mas_reciente") == 0)
+    {
+        //TODO emit enviar a subproceso con respecto al carpeta de transacciones mas reciente
+    }
 
 }
 

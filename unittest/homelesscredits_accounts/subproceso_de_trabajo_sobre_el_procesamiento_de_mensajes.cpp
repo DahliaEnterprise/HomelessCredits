@@ -15,7 +15,7 @@ void subproceso_de_trabajo_sobre_el_procesamiento_de_mensajes::establecer_conexi
 {
 
     QJsonObject jobj;
-    jobj.insert(QString("response"), QJsonValue(QString("connected")));
+    jobj.insert(QString("estado_de_respuesta"), QJsonValue(QString("conectado")));
 
     //
     //padre_conectado_al_servicio = (int*)1;

@@ -20,7 +20,7 @@ void administrador_de_conexiones_tcp::conectarse_al_servidor_de_contabilidad()
 
     //establecer la presencia del protocolo solicitando un protocolo
     QJsonObject jobj;
-    jobj.insert(QString("action"), QJsonValue("establish connection"));
+    jobj.insert(QString("solicitar"), QJsonValue("establecer_conexion"));
     QJsonDocument * jdoc = new QJsonDocument();
     jdoc->setObject(jobj);
     QByteArray compact_bytearray = jdoc->toJson(QJsonDocument::Compact);
@@ -42,5 +42,19 @@ void administrador_de_conexiones_tcp::conectarse_al_servidor_de_contabilidad()
     //el respuesta sobre el estado de conexión del protocolo
     QJsonDocument jdoc_respuesta_como_cadena = QJsonDocument::fromJson(respuesta_de_protocolo.toUtf8());
     QJsonObject jobj_respuesta_como_cadena = jdoc_respuesta_como_cadena.object();
-    qDebug() << jobj_respuesta_como_cadena;
+    if(jobj_respuesta_como_cadena.value("estado_de_respuesta").toString().compare("conectado") == 0)
+    {
+        qDebug() << "estado de protocol: conectado";
+            //crear un mensaje a nivel de protocolo que solicite la carpeta de transacciones más reciente
+            QJsonObject jobj_solicitar_el_carpeta_mas_reciente_de_transacciones;
+            jobj_solicitar_el_carpeta_mas_reciente_de_transacciones.insert(QString("solicitar"), QString("el_carpeta_de_transacciones_mas_reciente"));
+            QJsonDocument jdoc_solicitar_el_carpeta_mas_reciente_de_transacciones;
+            jdoc_solicitar_el_carpeta_mas_reciente_de_transacciones.setObject(jobj_solicitar_el_carpeta_mas_reciente_de_transacciones);
+            QByteArray compact_bytearray = jdoc_solicitar_el_carpeta_mas_reciente_de_transacciones.toJson(QJsonDocument::Compact);
+            QString mensaje = QString();
+            mensaje.append("7d5f44727224662a5062623522356076");
+            mensaje.append(QString("%1").arg(QString::fromUtf8(compact_bytearray)));
+            mensaje.append("7d5f44727224662a5062623522356076");
+            controlador_de_conexion_tcp->write(mensaje.toUtf8());
+    }
 }
