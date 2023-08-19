@@ -12,6 +12,8 @@ void el_coordinador_tcp::inicializar()
 
     lista_de_buferes_asociativos = new QHash<QTcpSocket *, bufer_de_un_mensaje *>();
     lista_de_estado_de_enlace_asociativo = new QHash<QTcpSocket *, estado_de_el_enlace *>();
+    directorio_de_transacciones = new pila_de_transacciones_compiladas();
+    directorio_de_transacciones->inicializar();
     lista_de_conexcion_tcp = new QVector<QTcpSocket*>();
 
     server = new QTcpServer();

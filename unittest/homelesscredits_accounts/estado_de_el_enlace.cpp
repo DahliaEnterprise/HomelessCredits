@@ -21,6 +21,9 @@ void estado_de_el_enlace::inicializar(QTcpSocket * enchufe, QByteArray establece
             QObject::connect(this, SIGNAL(enviar_a_subproceso_con_respecto_al_establecimiento_de_una_conexion()), identificador_de_proceso, SLOT(establecer_conexion()));
             QObject::connect(identificador_de_proceso, SIGNAL(resultados_de_la_solicitud_de_establecer_conexion(QJsonObject)), this, SLOT(manejar_la_respuesta_con_respecto_al_establecimiento_de_la_conexion(QJsonObject)));
 
+            //solicitar el carpeta de transacciones más reciente
+            QObject::connect(this, SIGNAL(enviar_a_subproceso_con_respecto_al_carpeta_de_transacciones_mas_reciente(QByteArray)), identificador_de_proceso, SLOT(adquirir_la_carpeta_de_transacciones_mas_reciente(QByteArray)));
+
     identificador_de_proceso->moveToThread(&subproceso_de_trabajo);
     subproceso_de_trabajo.start();
 }
@@ -41,9 +44,8 @@ void estado_de_el_enlace::mensaje_de_proceso(QByteArray mensaje_a_procesar)
         emit enviar_a_subproceso_con_respecto_al_establecimiento_de_una_conexion();
     }else if(solicitar_value.compare("el_carpeta_de_transacciones_mas_reciente") == 0)
     {
-        //TODO emit enviar a subproceso con respecto al carpeta de transacciones mas reciente
+        emit enviar_a_subproceso_con_respecto_al_carpeta_de_transacciones_mas_reciente(mensaje_a_procesar);
     }
-
 }
 
 

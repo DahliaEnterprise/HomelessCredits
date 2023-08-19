@@ -30,7 +30,7 @@ public slots:
 
 signals:
     void enviar_a_subproceso_con_respecto_al_establecimiento_de_una_conexion();
-
+    void enviar_a_subproceso_con_respecto_al_carpeta_de_transacciones_mas_reciente(QByteArray);
 };
 
 #endif // ESTADO_DE_EL_ENLACE_H

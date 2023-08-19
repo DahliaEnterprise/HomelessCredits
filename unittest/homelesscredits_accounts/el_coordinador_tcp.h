@@ -3,6 +3,7 @@
 
 #include "bufer_de_un_mensaje.h"
 #include "estado_de_el_enlace.h"
+#include "pila_de_transacciones_compiladas.h"
 
 #include <QObject>
 #include <QTcpServer>
@@ -22,6 +23,7 @@ private:
     QVector<QTcpSocket*> * lista_de_conexcion_tcp;
     QHash<QTcpSocket *, bufer_de_un_mensaje *> * lista_de_buferes_asociativos;
     QHash<QTcpSocket *, estado_de_el_enlace *> * lista_de_estado_de_enlace_asociativo;
+    pila_de_transacciones_compiladas * directorio_de_transacciones;
     QByteArray encapsulacion_identificador;
 
 signals:
