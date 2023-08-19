@@ -47,7 +47,7 @@ void el_coordinador_tcp::new_connection()
 
 void el_coordinador_tcp::ready_read()
 {
-    QTcpSocket *socket = qobject_cast<QTcpSocket *>(sender());
+    QTcpSocket * socket = qobject_cast<QTcpSocket *>(sender());
     if(socket)
     {
          QByteArray data = socket->readAll();

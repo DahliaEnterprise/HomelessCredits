@@ -22,8 +22,11 @@ private:
     QTcpSocket * enchufe_asociado; //esto se define fuera de esta clase en particular
     QByteArray encapsulacion_identificador;
 
+    //identificadores de estado de protocolo
+    int conectado_al_servicio;
+
 public slots:
-    void manejar_la_respuesta_con_respecto_al_establecimiento_de_la_conexion(QByteArray respuesta);
+    void manejar_la_respuesta_con_respecto_al_establecimiento_de_la_conexion(QJsonObject respuesta);
 
 signals:
     void enviar_a_subproceso_con_respecto_al_establecimiento_de_una_conexion();

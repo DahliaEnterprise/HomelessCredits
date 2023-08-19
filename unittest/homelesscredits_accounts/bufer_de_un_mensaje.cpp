@@ -58,8 +58,7 @@ void bufer_de_un_mensaje::eliminar_el_mensaje_completo_mas_reciente()
         int end_index = bufer.indexOf(encapsulacion_identificador, (start_index + encapsulacion_identificador.length()));
         end_index = end_index + encapsulacion_identificador.length();
         bufer = bufer.remove(start_index, (end_index - start_index));
-
-        qDebug() << "bufer1:" << bufer;
+\
     }
 }
 
