@@ -35,7 +35,7 @@ void el_coordinador_tcp::new_connection()
             lista_de_buferes_asociativos->insert(proximo_conexion, nuevo_bufer);
 
         estado_de_el_enlace * enlace_de_referencia = new estado_de_el_enlace();
-        enlace_de_referencia->inicializar(proximo_conexion, encapsulacion_identificador);
+        enlace_de_referencia->inicializar(proximo_conexion, encapsulacion_identificador, directorio_de_transacciones);
 
             //Make association
             lista_de_estado_de_enlace_asociativo->insert(proximo_conexion, enlace_de_referencia);

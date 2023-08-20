@@ -6,9 +6,10 @@ subproceso_de_trabajo_sobre_el_procesamiento_de_mensajes::subproceso_de_trabajo_
 
 }
 
-void subproceso_de_trabajo_sobre_el_procesamiento_de_mensajes::inicializar(int * definir_conectado_al_servicio)
+void subproceso_de_trabajo_sobre_el_procesamiento_de_mensajes::inicializar(int * definir_conectado_al_servicio, pila_de_transacciones_compiladas * establecer_identificador_para_transacciones_compiladas)
 {
     //padre_conectado_al_servicio = definir_conectado_al_servicio;
+    identificador_para_transacciones_compiladas = establecer_identificador_para_transacciones_compiladas;
 }
 
 void subproceso_de_trabajo_sobre_el_procesamiento_de_mensajes::establecer_conexion()
@@ -21,4 +22,9 @@ void subproceso_de_trabajo_sobre_el_procesamiento_de_mensajes::establecer_conexi
     //padre_conectado_al_servicio = (int*)1;
 
     emit resultados_de_la_solicitud_de_establecer_conexion(jobj);
+}
+
+void subproceso_de_trabajo_sobre_el_procesamiento_de_mensajes::adquirir_la_carpeta_de_transacciones_mas_reciente(QByteArray mensaje_a_procesar)
+{
+    QJsonObject jobj = identificador_para_transacciones_compiladas->obtener_el_carpeta_mas_reciente_de_transacciones();
 }

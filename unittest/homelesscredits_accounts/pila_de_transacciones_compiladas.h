@@ -4,6 +4,7 @@
 #include <QObject>
 #include <QHash>
 #include <QJsonObject>
+#include <QMutex>
 
 class pila_de_transacciones_compiladas : public QObject
 {
@@ -11,6 +12,7 @@ class pila_de_transacciones_compiladas : public QObject
 public:
     explicit pila_de_transacciones_compiladas(QObject *parent = nullptr);
     void inicializar();
+    QJsonObject obtener_el_carpeta_mas_reciente_de_transacciones();
 
 private:
     QHash<qint32, QJsonObject> * transaccions;

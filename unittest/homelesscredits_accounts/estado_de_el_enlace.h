@@ -2,6 +2,7 @@
 #define ESTADO_DE_EL_ENLACE_H
 
 #include "subproceso_de_trabajo_sobre_el_procesamiento_de_mensajes.h"
+#include "pila_de_transacciones_compiladas.h"
 
 #include <QObject>
 #include <QDebug>
@@ -13,7 +14,7 @@ class estado_de_el_enlace : public QObject
     Q_OBJECT
 public:
     explicit estado_de_el_enlace(QObject *parent = nullptr);
-    void inicializar(QTcpSocket * enchufe, QByteArray establecer_identificador_de_encapsulacion);
+    void inicializar(QTcpSocket * enchufe, QByteArray establecer_identificador_de_encapsulacion, pila_de_transacciones_compiladas * establecer_identificador_para_transacciones_compiladas);
     void mensaje_de_proceso(QByteArray mensaje_a_procesar);
 
 private:
@@ -21,6 +22,7 @@ private:
     QThread subproceso_de_trabajo;
     QTcpSocket * enchufe_asociado; //esto se define fuera de esta clase en particular
     QByteArray encapsulacion_identificador;
+    pila_de_transacciones_compiladas * identificador_para_transacciones_compiladas;
 
     //identificadores de estado de protocolo
     int conectado_al_servicio;

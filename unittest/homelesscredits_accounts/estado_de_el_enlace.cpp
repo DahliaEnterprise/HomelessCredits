@@ -6,7 +6,7 @@ estado_de_el_enlace::estado_de_el_enlace(QObject *parent)
 
 }
 
-void estado_de_el_enlace::inicializar(QTcpSocket * enchufe, QByteArray establecer_identificador_de_encapsulacion)
+void estado_de_el_enlace::inicializar(QTcpSocket * enchufe, QByteArray establecer_identificador_de_encapsulacion, pila_de_transacciones_compiladas * establecer_identificador_para_transacciones_compiladas)
 {
     //inicializar
     conectado_al_servicio = 0;
@@ -15,7 +15,7 @@ void estado_de_el_enlace::inicializar(QTcpSocket * enchufe, QByteArray establece
     enchufe_asociado = enchufe;
     encapsulacion_identificador = establecer_identificador_de_encapsulacion;
     identificador_de_proceso = new subproceso_de_trabajo_sobre_el_procesamiento_de_mensajes();
-    identificador_de_proceso->inicializar(&conectado_al_servicio);
+    identificador_de_proceso->inicializar(&conectado_al_servicio, pila_de_transacciones_compiladas * identificador_para_transacciones_compiladas);
         //señales y ranuras con respecto al procesamiento de mensajes
             //establecer el ciclo de conexión
             QObject::connect(this, SIGNAL(enviar_a_subproceso_con_respecto_al_establecimiento_de_una_conexion()), identificador_de_proceso, SLOT(establecer_conexion()));
@@ -23,6 +23,7 @@ void estado_de_el_enlace::inicializar(QTcpSocket * enchufe, QByteArray establece
 
             //solicitar el carpeta de transacciones más reciente
             QObject::connect(this, SIGNAL(enviar_a_subproceso_con_respecto_al_carpeta_de_transacciones_mas_reciente(QByteArray)), identificador_de_proceso, SLOT(adquirir_la_carpeta_de_transacciones_mas_reciente(QByteArray)));
+
 
     identificador_de_proceso->moveToThread(&subproceso_de_trabajo);
     subproceso_de_trabajo.start();

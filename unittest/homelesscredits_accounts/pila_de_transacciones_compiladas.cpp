@@ -11,3 +11,8 @@ void pila_de_transacciones_compiladas::inicializar()
     transaccions = new QHash<qint32, QJsonObject>();
 
 }
+
+void pila_de_transacciones_compiladas::obtener_el_carpeta_mas_reciente_de_transacciones()
+{
+
+}
