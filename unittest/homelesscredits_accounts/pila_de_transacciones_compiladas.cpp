@@ -12,7 +12,16 @@ void pila_de_transacciones_compiladas::inicializar()
 
 }
 
-void pila_de_transacciones_compiladas::obtener_el_carpeta_mas_reciente_de_transacciones()
+QJsonObject pila_de_transacciones_compiladas::obtener_el_carpeta_mas_reciente_de_transacciones()
 {
+    QJsonObject resultado = QJsonObject();
+
+    if(transaccions->size() == 0)
+    {
+        return resultado;
+    }else if(transaccions->size() > 0)
+    {
+        return resultado;
+    }
 
 }

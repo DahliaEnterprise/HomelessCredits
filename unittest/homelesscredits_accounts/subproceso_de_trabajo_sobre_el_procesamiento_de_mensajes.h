@@ -24,7 +24,8 @@ public slots:
     void adquirir_la_carpeta_de_transacciones_mas_reciente(QByteArray mensaje_a_procesar);
 
 signals:
-    void resultados_de_la_solicitud_de_establecer_conexion(QJsonObject result);
+    void resultados_de_la_solicitud_de_establecer_conexion(QJsonObject resultado);
+    void resultado_sobre_carpeta_de_transacciones_recientes(QJsonObject resultado);
 };
 
 #endif // SUBPROCESO_DE_TRABAJO_SOBRE_EL_PROCESAMIENTO_DE_MENSAJES_H

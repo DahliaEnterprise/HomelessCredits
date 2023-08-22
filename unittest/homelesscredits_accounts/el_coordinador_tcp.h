@@ -26,6 +26,7 @@ private:
     pila_de_transacciones_compiladas * directorio_de_transacciones;
     QByteArray encapsulacion_identificador;
 
+
 signals:
 
 private slots:

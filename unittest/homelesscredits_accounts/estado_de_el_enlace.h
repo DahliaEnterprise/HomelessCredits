@@ -22,13 +22,13 @@ private:
     QThread subproceso_de_trabajo;
     QTcpSocket * enchufe_asociado; //esto se define fuera de esta clase en particular
     QByteArray encapsulacion_identificador;
-    pila_de_transacciones_compiladas * identificador_para_transacciones_compiladas;
 
     //identificadores de estado de protocolo
     int conectado_al_servicio;
 
 public slots:
     void manejar_la_respuesta_con_respecto_al_establecimiento_de_la_conexion(QJsonObject respuesta);
+    void manejar_la_respuesta_sobre_la_retirada_de_la_carpeta_mas_nueva_de_transacciones(QJsonObject respuesta);
 
 signals:
     void enviar_a_subproceso_con_respecto_al_establecimiento_de_una_conexion();

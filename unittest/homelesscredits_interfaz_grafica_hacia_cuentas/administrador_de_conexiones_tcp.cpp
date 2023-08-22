@@ -42,6 +42,7 @@ void administrador_de_conexiones_tcp::conectarse_al_servidor_de_contabilidad()
     //el respuesta sobre el estado de conexión del protocolo
     QJsonDocument jdoc_respuesta_como_cadena = QJsonDocument::fromJson(respuesta_de_protocolo.toUtf8());
     QJsonObject jobj_respuesta_como_cadena = jdoc_respuesta_como_cadena.object();
+    qDebug() << jobj_respuesta_como_cadena.value("estado_de_respuesta");
     if(jobj_respuesta_como_cadena.value("estado_de_respuesta").toString().compare("conectado") == 0)
     {
         qDebug() << "estado de protocol: conectado";

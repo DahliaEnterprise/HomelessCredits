@@ -26,5 +26,12 @@ void subproceso_de_trabajo_sobre_el_procesamiento_de_mensajes::establecer_conexi
 
 void subproceso_de_trabajo_sobre_el_procesamiento_de_mensajes::adquirir_la_carpeta_de_transacciones_mas_reciente(QByteArray mensaje_a_procesar)
 {
-    QJsonObject jobj = identificador_para_transacciones_compiladas->obtener_el_carpeta_mas_reciente_de_transacciones();
+
+    QJsonObject jobj_resultados = identificador_para_transacciones_compiladas->obtener_el_carpeta_mas_reciente_de_transacciones();
+    QJsonDocument jdoc = QJsonDocument();
+    QJsonObject respuesta = QJsonObject();
+    respuesta.insert(QString("reciente_carpeta_de_transacciones"), QJsonObject());
+    jdoc.setObject(respuesta);
+
+    emit resultado_sobre_carpeta_de_transacciones_recientes(respuesta);
 }

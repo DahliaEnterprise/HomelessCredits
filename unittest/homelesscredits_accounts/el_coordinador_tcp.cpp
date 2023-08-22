@@ -64,6 +64,7 @@ void el_coordinador_tcp::ready_read()
              //Process next message
              estado_de_el_enlace * enlace_de_referencia = lista_de_estado_de_enlace_asociativo->value(socket);
              QByteArray bufer_temporal = QByteArray(bufer->obtener_el_siguiente_mensaje());
+             qDebug() << bufer_temporal;
              bufer->eliminar_el_mensaje_completo_mas_reciente();
              enlace_de_referencia->mensaje_de_proceso(bufer_temporal);
          }
