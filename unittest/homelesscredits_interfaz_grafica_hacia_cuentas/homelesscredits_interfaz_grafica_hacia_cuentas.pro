@@ -12,12 +12,14 @@ SOURCES += \
     administrador_de_conexiones_tcp.cpp \
     diseno_de_estado_de_conexion.cpp \
     main.cpp \
+    mapa_de_datos_virtual_para_personas_sin_hogar.cpp \
     solo_ventana.cpp \
     solo_ventana_lista_de_botones.cpp
 
 HEADERS += \
     administrador_de_conexiones_tcp.h \
     diseno_de_estado_de_conexion.h \
+    mapa_de_datos_virtual_para_personas_sin_hogar.h \
     solo_ventana.h \
     solo_ventana_lista_de_botones.h
 

@@ -57,5 +57,15 @@ void administrador_de_conexiones_tcp::conectarse_al_servidor_de_contabilidad()
             mensaje.append(QString("%1").arg(QString::fromUtf8(compact_bytearray)));
             mensaje.append("7d5f44727224662a5062623522356076");
             controlador_de_conexion_tcp->write(mensaje.toUtf8());
+
+            controlador_de_conexion_tcp->waitForReadyRead();
+            QByteArray respuesta = controlador_de_conexion_tcp->readAll();
+            QString respuesta_de_protocolo = QString::fromUtf8(respuesta);
+            respuesta_de_protocolo = respuesta_de_protocolo.replace("7d5f44727224662a5062623522356076", "");
+
+            QJsonDocument jdoc_respuesta_como_texto = QJsonDocument::fromJson(respuesta_de_protocolo.toUtf8());
+            QJsonObject jobj_respuesta_como_texto = jdoc_respuesta_como_texto.object();
+            QJsonObject jobj_reciente_carpeta_de_transacciones = jobj_respuesta_como_texto.value("reciente_carpeta_de_transacciones").toObject();
+
     }
 }

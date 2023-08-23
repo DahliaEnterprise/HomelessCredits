@@ -6,6 +6,9 @@ estado_de_el_enlace::estado_de_el_enlace(QObject *parent)
 
 }
 
+
+
+
 void estado_de_el_enlace::inicializar(QTcpSocket * enchufe, QByteArray establecer_identificador_de_encapsulacion, pila_de_transacciones_compiladas * establecer_identificador_para_transacciones_compiladas)
 {
     //inicializar
@@ -30,6 +33,7 @@ void estado_de_el_enlace::inicializar(QTcpSocket * enchufe, QByteArray establece
 }
 
 
+
 void estado_de_el_enlace::mensaje_de_proceso(QByteArray mensaje_a_procesar)
 {
 
@@ -52,12 +56,14 @@ void estado_de_el_enlace::mensaje_de_proceso(QByteArray mensaje_a_procesar)
 }
 
 
+
+
 void estado_de_el_enlace::manejar_la_respuesta_con_respecto_al_establecimiento_de_la_conexion(QJsonObject respuesta)
 {
 
     QJsonDocument respuesta_jdoc = QJsonDocument(respuesta);
 
-qDebug() << "conexion texto";
+    qDebug() << "conexion texto";
     //send to tcp connection
     QString paquete_para_enviar = QString();
     paquete_para_enviar.append(encapsulacion_identificador);
@@ -66,7 +72,22 @@ qDebug() << "conexion texto";
     enchufe_asociado->write(paquete_para_enviar.toUtf8());
 }
 
+
+
+
 void estado_de_el_enlace::manejar_la_respuesta_sobre_la_retirada_de_la_carpeta_mas_nueva_de_transacciones(QJsonObject respuesta)
 {
     qDebug() << "nueva transactions " << respuesta;
+    QJsonObject reciente_carpeta_de_transacciones = respuesta.value(QString("reciente_carpeta_de_transacciones")).toObject();
+    QJsonDocument respuesta_jdoc = QJsonDocument(respuesta);
+    int reciente_carpeta_de_transacciones_size = reciente_carpeta_de_transacciones.size();
+    if(reciente_carpeta_de_transacciones_size == 0)
+    {
+        QString paquete_para_enviar = QString();
+        paquete_para_enviar.append(encapsulacion_identificador);
+        paquete_para_enviar.append(respuesta_jdoc.toJson(QJsonDocument::Compact));
+        paquete_para_enviar.append(encapsulacion_identificador);
+        enchufe_asociado->write(paquete_para_enviar.toUtf8());
+    }
+
 }
