@@ -1,6 +1,6 @@
 #include "mapa_de_datos_virtual_para_personas_sin_hogar.h"
 
-mapa_de_datos_virtual_para_personas_sin_hogar::homelesscredits_hash_function(QObject *parent)
+mapa_de_datos_virtual_para_personas_sin_hogar::mapa_de_datos_virtual_para_personas_sin_hogar(QObject *parent)
     : QObject{parent}
 {
 

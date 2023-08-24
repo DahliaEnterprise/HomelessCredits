@@ -9,6 +9,11 @@ administrador_de_conexiones_tcp::administrador_de_conexiones_tcp(QObject *parent
 void administrador_de_conexiones_tcp::inicializar()
 {
     controlador_de_conexion_tcp = new QTcpSocket();
+    trabajador = new el_trabajador_genera_un_resultado_relacionado_con_la_funcion_de_otacion();
+        QObject::connect(this, SIGNAL(generar_la_primera_carpeta()), trabajador, SLOT(generar_la_primera_carpeta()));
+
+    trabajador->moveToThread(&trabajador_identificador);
+    trabajador_identificador.start();
 
 }
 
@@ -66,6 +71,10 @@ void administrador_de_conexiones_tcp::conectarse_al_servidor_de_contabilidad()
             QJsonDocument jdoc_respuesta_como_texto = QJsonDocument::fromJson(respuesta_de_protocolo.toUtf8());
             QJsonObject jobj_respuesta_como_texto = jdoc_respuesta_como_texto.object();
             QJsonObject jobj_reciente_carpeta_de_transacciones = jobj_respuesta_como_texto.value("reciente_carpeta_de_transacciones").toObject();
+            if(jobj_reciente_carpeta_de_transacciones.size() == 0)
+            {
+                //no hay acceso a la carpeta debido a que no existe
 
+            }
     }
 }
