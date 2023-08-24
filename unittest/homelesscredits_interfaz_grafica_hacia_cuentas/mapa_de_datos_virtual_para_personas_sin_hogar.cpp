@@ -10,12 +10,15 @@ void mapa_de_datos_virtual_para_personas_sin_hogar::initialize_hash_function()
 {
     character_map = QString("abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789!@#$%^&*()-_=+{}[]~`;:'\"<>,. ?");
 }
-void mapa_de_datos_virtual_para_personas_sin_hogar::string_to_homelesscredits_hash(QString string_to_hash, qint32 iterations)
+QString mapa_de_datos_virtual_para_personas_sin_hogar::string_to_homelesscredits_hash(QString string_to_hash, qint32 iterations)
 {
     QMap<QString, QVariant> result_of_string_with_additive_rotation = this->apply_self_additive_rotation(string_to_hash);
     QString additive_string = result_of_string_with_additive_rotation.value("result").toString();
     QString additive_string_reduced = this->reduce_string(additive_string, 16, iterations);
-    qDebug() << additive_string_reduced.toUtf8().toHex();
+    QString output = QString();
+    output = QString("%1").arg(QString::fromUtf8(additive_string_reduced.toUtf8().toHex()));
+
+    return output;
 }
 
 QMap<QString, QVariant> mapa_de_datos_virtual_para_personas_sin_hogar::apply_self_additive_rotation(QString string_to_hash)
@@ -36,7 +39,7 @@ QMap<QString, QVariant> mapa_de_datos_virtual_para_personas_sin_hogar::apply_sel
         //Initialize character to rotate variable
         QString character_to_rotate = QString("%1").arg(source_string.at(total_characters_appended_to_result));
 
-        qDebug() << total_characters_appended_to_result;
+        //qDebug() << total_characters_appended_to_result;
         //Rotate character by every character(index) times the total characters produced(plus 2) times the source string index(plus 2)
         int additive_source_index = 0;
         while(additive_source_index < source_string.length())

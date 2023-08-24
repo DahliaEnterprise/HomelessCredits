@@ -10,6 +10,7 @@ void administrador_de_conexiones_tcp::inicializar()
 {
     controlador_de_conexion_tcp = new QTcpSocket();
     trabajador = new el_trabajador_genera_un_resultado_relacionado_con_la_funcion_de_otacion();
+    trabajador->inicilizar();
         QObject::connect(this, SIGNAL(generar_la_primera_carpeta()), trabajador, SLOT(generar_la_primera_carpeta()));
 
     trabajador->moveToThread(&trabajador_identificador);
@@ -74,7 +75,7 @@ void administrador_de_conexiones_tcp::conectarse_al_servidor_de_contabilidad()
             if(jobj_reciente_carpeta_de_transacciones.size() == 0)
             {
                 //no hay acceso a la carpeta debido a que no existe
-
+                emit generar_la_primera_carpeta();
             }
     }
 }

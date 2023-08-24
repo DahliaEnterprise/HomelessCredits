@@ -23,7 +23,7 @@ private:
     QThread trabajador_identificador;
 
 signals:
-
+    void generar_la_primera_carpeta();
 };
 
 #endif // ADMINISTRADOR_DE_CONEXIONES_TCP_H
