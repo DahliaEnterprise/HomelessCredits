@@ -22,6 +22,9 @@ private:
     el_trabajador_genera_un_resultado_relacionado_con_la_funcion_de_otacion * trabajador;
     QThread trabajador_identificador;
 
+public slots:
+    void resultado_sobre_carpeta_primeo_nuevo(QString content, QString result);
+
 signals:
     void generar_la_primera_carpeta();
 };

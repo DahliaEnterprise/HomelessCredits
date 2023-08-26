@@ -12,7 +12,7 @@ void administrador_de_conexiones_tcp::inicializar()
     trabajador = new el_trabajador_genera_un_resultado_relacionado_con_la_funcion_de_otacion();
     trabajador->inicilizar();
         QObject::connect(this, SIGNAL(generar_la_primera_carpeta()), trabajador, SLOT(generar_la_primera_carpeta()));
-
+        QObject::connect(trabajador, SIGNAL(resultado_sobre_carpeta_primeo_nuevo(QString, QString)), this, SLOT(resultado_sobre_carpeta_primeo_nuevo(QString, QString)));
     trabajador->moveToThread(&trabajador_identificador);
     trabajador_identificador.start();
 
@@ -78,4 +78,18 @@ void administrador_de_conexiones_tcp::conectarse_al_servidor_de_contabilidad()
                 emit generar_la_primera_carpeta();
             }
     }
+}
+
+void administrador_de_conexiones_tcp::resultado_sobre_carpeta_primeo_nuevo(QString content, QString result)
+{
+    QJsonObject jobj = QJsonObject();
+    jobj.insert(QString("pedido"), QJsonValue(QString("envío_sobre_la_primera_carpeta")));
+    QJsonDocument jdoc = QJsonDocument();
+    jdoc.setObject(jobj);
+
+    QString mensaje = QString();
+    mensaje.append("7d5f44727224662a5062623522356076");
+    mensaje.append(QString("%1").arg(QString::fromUtf8(jdoc.toJson(QJsonDocument::Compact))));
+    mensaje.append("7d5f44727224662a5062623522356076");
+    controlador_de_conexion_tcp->write(mensaje.toUtf8());
 }

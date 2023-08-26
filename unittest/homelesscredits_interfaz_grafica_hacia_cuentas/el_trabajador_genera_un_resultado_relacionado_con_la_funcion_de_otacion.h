@@ -26,7 +26,8 @@ public slots:
     void generar_la_primera_carpeta();
 
 signals:
-    void resultado_sobre_carpeta_primeo_nuevo(QJsonObject);
+    void resultado_sobre_carpeta_primeo_nuevo(QString, QString);
+
 };
 
 #endif // EL_TRABAJADOR_GENERA_UN_RESULTADO_RELACIONADO_CON_LA_FUNCION_DE_OTACION_H

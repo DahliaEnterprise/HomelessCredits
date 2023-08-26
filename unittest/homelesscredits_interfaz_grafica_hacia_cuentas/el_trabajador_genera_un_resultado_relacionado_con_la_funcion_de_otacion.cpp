@@ -33,10 +33,10 @@ void el_trabajador_genera_un_resultado_relacionado_con_la_funcion_de_otacion::ge
         jdoc.setObject(jobj);
         QByteArray string_to_hash_as_qbytearray = jdoc.toJson(QJsonDocument::Compact);
         QString string_to_hash_as_qstring = QString::fromUtf8(string_to_hash_as_qbytearray);
-        QString resultados = identificador_de_mapa->string_to_homelesscredits_hash(string_to_hash_as_qstring, 100);
+        QString resultados = identificador_de_mapa->string_to_homelesscredits_hash(string_to_hash_as_qstring, 1000);
         int indice = 0;
         int detected_difficulty = 0;
-        int current_difficulty = 1;
+        int current_difficulty = 2;
         while(indice < current_difficulty)
         {
             if(resultados.mid(resultados.length()-(indice + 1), 1).compare("0") == 0)
@@ -50,11 +50,12 @@ void el_trabajador_genera_un_resultado_relacionado_con_la_funcion_de_otacion::ge
         qDebug() << resultados << "\n";
         qDebug() << "DETECTED DIFFICULTY:" << detected_difficulty;
 
-        //emit resultado_sobre_carpeta_primeo_nuevo(jobj);//todo change to string
-        if(detected_difficulty == 1)
+
+        if(detected_difficulty == current_difficulty)
         {
             seguir = 0;
             qDebug() << "DETECTED A FOLDER";
+            emit resultado_sobre_carpeta_primeo_nuevo(string_to_hash_as_qstring, resultados);
         }
     }
 }
