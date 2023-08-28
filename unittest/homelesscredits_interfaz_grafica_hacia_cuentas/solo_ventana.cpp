@@ -21,6 +21,8 @@ void solo_ventana::inicializar()
         estado_de_conexion->hide();
         layout->addWidget(estado_de_conexion);
 
+    identificador_clave_gerente = new clave_gerente();
+
     lista_de_conexiones = new administrador_de_conexiones_tcp();
     lista_de_conexiones->inicializar();
 }
@@ -29,6 +31,7 @@ void solo_ventana::boton_presionado(QString titulo_de_boton)
 {
     if(titulo_de_boton.compare("Conectar a la Gestion de Cuentas") == 0)
     {
+        identificador_clave_gerente->clave_nuevo();
         lista_de_botones->hide();
         estado_de_conexion->show();
         lista_de_conexiones->conectarse_al_servidor_de_contabilidad();
