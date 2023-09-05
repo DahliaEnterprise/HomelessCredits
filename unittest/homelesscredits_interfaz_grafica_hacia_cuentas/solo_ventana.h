@@ -4,7 +4,7 @@
 #include "solo_ventana_lista_de_botones.h"
 #include "pagina/diseno_de_estado_de_conexion.h"
 #include "administrador_de_conexiones_tcp.h"
-#include "clave_gerente.h"
+#include "gestion_criptica/clave_gerente.h"
 
 #include <QWidget>
 #include <QBoxLayout>

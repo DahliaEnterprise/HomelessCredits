@@ -10,7 +10,7 @@ CONFIG += c++11
 
 SOURCES += \
     administrador_de_conexiones_tcp.cpp \
-    clave_gerente.cpp \
+    gestion_criptica/clave_gerente.cpp \
     pagina/diseno_de_estado_de_conexion.cpp \
     el_trabajador_genera_un_resultado_relacionado_con_la_funcion_de_otacion.cpp \
     main.cpp \
@@ -20,7 +20,7 @@ SOURCES += \
 
 HEADERS += \
     administrador_de_conexiones_tcp.h \
-    clave_gerente.h \
+    gestion_criptica/clave_gerente.h \
     pagina/diseno_de_estado_de_conexion.h \
     el_trabajador_genera_un_resultado_relacionado_con_la_funcion_de_otacion.h \
     mapa_de_datos_virtual_para_personas_sin_hogar.h \
